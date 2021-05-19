@@ -17,3 +17,19 @@ body {
     border-radius: 0;
     border-bottom: 4px solid black;
   }
+
+/* main {
+    margin: 10px auto;
+
+} */
+
+.search-btn {
+    /* color: black;
+    background-color: turquoise; */
+
+}
+
+.search-form-container, .current-weather-container {
+    padding: 10px;
+    margin: 10px auto;
+}
