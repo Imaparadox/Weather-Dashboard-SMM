@@ -29,6 +29,11 @@
                 <div class="d-flex flex-column w-100">
                     <button class="btn btn-outline-dark me-2 clear-history-btn">Clear History</button>
                 </div>
+                <!-- Div for appended city results -->
+                <div class="d-flex flex-column w-100 city-container">
+                    <h3>Cities:</h3>
+                    <div class="city-results"></div>
+                </div>
             </div>
             <!-- Current weather display container -->
             <div class="d-flex col-md-9 border border-1 border-dark rounded-0 current-weather-container">
@@ -54,9 +59,11 @@
     </main>
     <!-- 5 Day weather forecast -->
     <div class="d-flex row col-md-6">
-        <h2 class="col-md-12">Five Day Forecast:</h2>
+        <h2 class="col-md-6">Five Day Forecast:</h2>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 
