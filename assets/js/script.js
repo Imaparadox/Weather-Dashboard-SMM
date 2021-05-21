@@ -27,8 +27,8 @@ function searchResults(locationObject) {
     var { lat } = locationObject
     var { lon } = locationObject
     fetch(api)
-        .then(function(response) {
-            return response.json();
+        .then(function(locationObject) {
+            return locationObject.json();
         })
         .then(function(data) {
             console.log(data);
@@ -51,10 +51,10 @@ function getCoordinates(search) {
 //Trims empty spaces from user input
 function handleSearch(event) {
     event.preventDefault();
-    var search = searchInput.value.trim()
+    var search = searchInput.val().trim();
     console.log(search);
     getCoordinates(search);
-    searchInput.value = "";
+    searchInput.val("");
 };
 
 searchButton.on("click", handleSearch);
