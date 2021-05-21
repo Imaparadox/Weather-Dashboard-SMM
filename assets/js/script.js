@@ -21,25 +21,34 @@ var weatherForecast = $(".weather-forecast");
 var apiKey = "f1297039f6aa07eefba2bdda4c4c9199";
 
 //Function that fetches weather API from user input and search click
+//Make variables
 function searchResults(locationObject) {
-    var api = `https://api.openweathermap.org/data/2.5/onecall?lat=" + {lat} + "&lon=" + {lon} + "&exclude=" + {part} + "&appid=" + `;
-    var {lat} = locationObject
-    var {lon} = locationObject
-    fetch().then 
+    var api = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${part}&appid=${apiKey}`;
+    var { lat } = locationObject
+    var { lon } = locationObject
+    fetch(api)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            console.log(data);
+        });
 
 };
 
+//Function that fetches city geographical locations
 function getCoordinates(search) {
     var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${apiKey}`;
     fetch(apiUrl)
         .then(function (response) {
-            return response.json()
+            return response.json();
         })
         .then(function (data) {
             console.log(data.coord);
         })
 }
 
+//Trims empty spaces from user input
 function handleSearch(event) {
     event.preventDefault();
     var search = searchInput.value.trim()
