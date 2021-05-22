@@ -61,7 +61,7 @@ function handleSearch(event) {
 searchButton.on("click", handleSearch);
 
 //Function that creates div elements to city-results
-function getCityInfo() {
+function appendListedCity() {
     var enteredCity = searchResults();
     $(".city-results").append("<li>" + enteredCity + "</li>");
     console.log(enteredCity);  
