@@ -22,17 +22,18 @@ var apiKey = "f1297039f6aa07eefba2bdda4c4c9199";
 
 //Fetches weather API from user input and search click
 //Make variables
-function searchResults() {
-    var api = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${part}&appid=${apiKey}`;
-    var { lat } = locationObject
-    var { lon } = locationObject
+// Add &exclude=${ part } to var api when we have that defined. For units of measurements
+function searchResults(coord) {
+    var { lat, lon } = coord;
+    var api = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
     fetch(api)
-        .then(function(response) {
+        .then(function (response) {
             return response.json();
         })
-        .then(function(locationObject) {
-            console.log(locationObject);
+        .then(function (data) {
+            console.log(data);
         });
+    //Find current Date and time
 
 };
 
@@ -44,7 +45,7 @@ function getCoordinates(search) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data.coord);
+            searchResults(data.coord);
         })
 }
 
@@ -60,9 +61,14 @@ function handleSearch(event) {
 searchButton.on("click", handleSearch);
 
 //Function that creates div elements to city-results
+function getCityInfo() {
+    var enteredCity = searchResults();
+    $(".city-results").append("<li>" + enteredCity + "</li>");
+    console.log(enteredCity);  
+};
 
 //Function that clears city-results when clicked
 
 //Function that create
 
-searchResults();
+// searchResults();
