@@ -58,9 +58,10 @@ function handleSearch(event) {
     searchInput.val("");
 };
 
+//When search button is clicked the handleSearch function is called
 searchButton.on("click", handleSearch);
 
-//Function that creates div elements to city-results
+//Creates city list elements and appends them  to city-results
 function appendListedCity() {
     var enteredCity = searchResults();
     $(".city-results").append("<li>" + enteredCity + "</li>");
