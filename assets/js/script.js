@@ -20,6 +20,9 @@ var weatherForecast = $(".weather-forecast");
 //Weather API key
 var apiKey = "f1297039f6aa07eefba2bdda4c4c9199";
 
+//Variable that stores city results
+var cityStorage = []
+
 //Fetches weather API from user input and search click
 //Make variables
 // Add &exclude=${ part } to var api when we have that defined. For units of measurements
@@ -31,9 +34,15 @@ function searchResults(coord) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
+            cityStorage.push(data)
         });
-    //Find current Date and time
+    //Then you can add a function which iterates over that array and renders an element for each.
+    //     function iterateStorageArray() {
+    // cityStorage.forEach()
+    //     };
+    $(".city-results").each(function () {
+        $("li").append(cityStorage);
+    });
 
 };
 
@@ -63,9 +72,10 @@ searchButton.on("click", handleSearch);
 
 //Creates city list elements and appends them  to city-results
 function appendListedCity() {
-    var enteredCity = searchResults();
-    $(".city-results").append("<li>" + enteredCity + "</li>");
-    console.log(enteredCity);  
+    // var enteredCity = searchResults(cityResults);
+    // $(".city-results").append("<li>" + enteredCity + "</li>");
+    // console.log(enteredCity);  
+
 };
 
 //Function that clears city-results when clicked
