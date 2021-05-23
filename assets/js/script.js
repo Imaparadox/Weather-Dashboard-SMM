@@ -25,7 +25,6 @@ var cityStorage = [];
 
 //Fetches weather API from user input and search click
 //Make variables
-// Add &exclude=${ part } to var api when we have that defined. For units of measurements
 function searchResults(coord) {
     var { lat, lon } = coord;
     var api = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
@@ -33,20 +32,15 @@ function searchResults(coord) {
         .then(function (response) {
             return response.json();
         })
+        //Takes the data from fetch and displays the data in the web browser
         .then(function (data) {
             cityStorage.push(data)
+            console.log(data);
+            temperature.text(data.current.temp);
+            humidity.text(data.current.humidity + "%");
+            wind.text(data.current.wind_speed + " mph");
+            currentWeatherIcon.append($("<img>").attr("src", "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"))
         });
-    //Then you can add a function which iterates over that array and renders an element for each.
-    //     function iterateStorageArray() {
-    // cityStorage.forEach()
-    //     };
-    // $(".city-results").each(function () {
-    //     $("li").append(cityStorage);
-    // });
-    // searchCity = $('.search-input').val();
-    // console.log(searchCity)
-    // $('.search-input').val("");
-
 };
 
 //Fetches city geographical locations
@@ -58,8 +52,8 @@ function getCoordinates(search) {
         })
         .then(function (data) {
             searchResults(data.coord);
-        })
-}
+        });
+};
 
 //Trims empty spaces from user input
 function handleSearch(event) {
@@ -68,28 +62,25 @@ function handleSearch(event) {
     console.log(search);
     getCoordinates(search);
     searchInput.val("");
+    //Creates city list elements and appends them  to city-results
+    var itemList = $('<li>').addClass('.city-results').text(search);
+    $(".city-results").append(itemList);
+    //Appends search result to city-name-title h3
+    $("#city-name-title").addClass('.city-name-title').text(search);
+    $(".city-name-title").append(cityNameTitle);
 
-    searchCity = $('.search-input').val();
-    console.log(searchCity)
-    // $('.search-input').val("");
-    var itemList = $('<li>').addClass('.city-results').text(searchCity)
-        $(".city-results").append(itemList)
-        console.log(itemList);
+    // currentCity.text(data.name + " ");
+    // temperature.text(data.main.temp);
+    // humidity.text(data.main.humidity + "%");
+    // wind.text(data.wind.speed + " mph");
+    // currentWeatherIcon.attr("src", "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png")
 };
 
 //When search button is clicked the handleSearch function is called
 searchButton.on("click", handleSearch);
+//When clear history button is clicked the city list items are removed
+$(".clear-history-btn").click(function () { $("li").remove() });
 
-//Creates city list elements and appends them  to city-results
-function appendListedCity() {
-    // var enteredCity = searchResults(cityResults);
-    // $(".city-results").append("<li>" + enteredCity + "</li>");
-    // console.log(enteredCity);  
+//Function that creates
 
-};
 
-//Function that clears city-results when clicked
-
-//Function that create
-
-// searchResults();

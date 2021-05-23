@@ -23,3 +23,9 @@ body {
     padding: 10px;
     margin: 10px auto;
 }
+
+.city-results {
+  list-style: none;
+  padding: 5px;
+  margin: 10px auto;
+}
