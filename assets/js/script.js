@@ -21,7 +21,7 @@ var weatherForecast = $(".weather-forecast");
 var apiKey = "f1297039f6aa07eefba2bdda4c4c9199";
 
 //Variable that stores city results
-var cityStorage = []
+var cityStorage = [];
 
 //Fetches weather API from user input and search click
 //Make variables
@@ -40,9 +40,12 @@ function searchResults(coord) {
     //     function iterateStorageArray() {
     // cityStorage.forEach()
     //     };
-    $(".city-results").each(function () {
-        $("li").append(cityStorage);
-    });
+    // $(".city-results").each(function () {
+    //     $("li").append(cityStorage);
+    // });
+    // searchCity = $('.search-input').val();
+    // console.log(searchCity)
+    // $('.search-input').val("");
 
 };
 
@@ -65,6 +68,13 @@ function handleSearch(event) {
     console.log(search);
     getCoordinates(search);
     searchInput.val("");
+
+    searchCity = $('.search-input').val();
+    console.log(searchCity)
+    // $('.search-input').val("");
+    var itemList = $('<li>').addClass('.city-results').text(searchCity)
+        $(".city-results").append(itemList)
+        console.log(itemList);
 };
 
 //When search button is clicked the handleSearch function is called
