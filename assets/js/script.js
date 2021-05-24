@@ -88,15 +88,20 @@ $(".clear-history-btn").click(function () { $("li").remove() });
 
 //
 function handleUvIndex(data) {
-    if (data.current.uvi <= 2) {
-        uvIndex.addClass("badge bg-success text-dark");
-    } else if (data.current.uvi > 4 && data.current.uvi <= 7) {
-        uvIndex.removeClass("badge bg-success");
-        uvIndex.addClass("badge bg-warning text-dark");
+
+    uvIndex.addClass("badge");
+    if (data.current.uvi < 3) {
+        uvIndex.removeClass("bg-warning text-dark bg-danger")
+        uvIndex.addClass("bg-success");
+    } else if (data.current.uvi >= 3 && data.current.uvi < 6) {
+        uvIndex.removeClass("bg-success bg-danger");
+        uvIndex.addClass("bg-warning text-dark");
+    } else if (data.current.uvi >= 6 && data.current.uvi < 8) {
+        uvIndex.removeClass("bg-warning text-dark bg-success");
+        uvIndex.addClass("bg-danger");
     } else {
-        uvIndex.removeClass("badge bg-success");
-        uvIndex.removeClass("badge bg-warning text-dark");
-        uvIndex.addClass("badge bg-danger");
+        uvIndex.removeClass("bg-warning text-dark bg-success");
+        uvIndex.addClass("bg-danger");
     }
 };
 
