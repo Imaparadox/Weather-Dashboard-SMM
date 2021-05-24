@@ -45,6 +45,8 @@ function searchResults(coord) {
             wind.text("Wind Speed: " + data.current.wind_speed + " mph");
             uvIndex.text("UV Index: " + data.current.uvi);
             currentWeatherIcon.append($("<img>").attr("src", "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"))
+            //Changes the color of the text based on the current uv index
+            handleUvIndex(data);
         });
 };
 
@@ -86,9 +88,6 @@ $(".clear-history-btn").click(function () { $("li").remove() });
 
 //Function that handles UV Index
 function handleUvIndex(data) {
-    // searchResults();
-    // console.log(data);
-    uvIndex.text(data.current.uvi);
     if (data.current.uvi <= 2) {
         uvIndex.addClass("badge bg-success text-dark");
     } else if (data.current.uvi <= 5) {
