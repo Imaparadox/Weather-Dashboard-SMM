@@ -86,11 +86,11 @@ searchButton.on("click", handleSearch);
 //When clear history button is clicked the city list items are removed
 $(".clear-history-btn").click(function () { $("li").remove() });
 
-//Function that handles UV Index
+//
 function handleUvIndex(data) {
     if (data.current.uvi <= 2) {
         uvIndex.addClass("badge bg-success text-dark");
-    } else if (data.current.uvi <= 5) {
+    } else if (data.current.uvi > 4 && data.current.uvi <= 7) {
         uvIndex.removeClass("badge bg-success");
         uvIndex.addClass("badge bg-warning text-dark");
     } else {
