@@ -39,6 +39,8 @@ function searchResults(coord) {
         .then(function (data) {
             cityStorage.push(data)
             console.log(data);
+            //Displays the five day forecast 
+            fiveDayForecast(data);
             //Current weather is displayed in the browser window
             temperature.text("Temperature: " + data.current.temp + " °F");
             humidity.text("Humidity: " + data.current.humidity + " %");
@@ -47,6 +49,8 @@ function searchResults(coord) {
             currentWeatherIcon.append($("<img>").attr("src", "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"))
             //Changes the color of the text based on the current uv index
             handleUvIndex(data);
+            //Click on the city result element to see storage
+            cityHistory(data);
         });
 };
 
@@ -107,17 +111,22 @@ function handleUvIndex(data) {
 
 //Displays the five day fore cast for selected city 
 function fiveDayForecast(data) {
+    //Variable that stores the daily object
     var fiveDayWeather = data.daily;
-    console.log(fiveDayWeather);
-    //create for loop that will iterate 5 weather cards
-    for (var i = 0; i < 5; i++) {
-        console.log(weatherForecast.data.daily.length);
+    //Create for loop that will iterate 5 weather cards
+    for (var i = 1; i < 6; i++) {
+        console.log(fiveDayWeather[i]);
+        //Date for 5 day forecast
+        var fiveDayDaily = data.daily[i].dt;
+        var date = new Date(fiveDayDaily * 1000);
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const year = date.getFullYear();
 
-        // $(".weather-forecast").append($("<div>", { class: "five-day" + i }).clone());
         // Query Selectors that will append divs with card classes to weatherForecast
         //Card containers
         var weatherForecastCol = $("<div class='col-12 col-md-6 col-lg mb-3'>");
-        var weatherForecastCard = $("<div class='weather-card text-dark bg-primary'>");
+        var weatherForecastCard = $("<div class='weather-card text-dark bg-light'>");
         var weatherForecastBody = $("<div class='weather-card-body'>");
         //Card text
         var weatherForecastDate = $("<h5 class='weather-card-title'>");
@@ -129,14 +138,26 @@ function fiveDayForecast(data) {
         weatherForecastCol.append(weatherForecastCard);
         weatherForecastCard.append(weatherForecastBody);
         //Append to text
-        weatherForecastCardBody.append(weatherForecastDate);
-        weatherForecastCardBody.append(weatherForecastIcon);
-        weatherForecastCardBody.append(weatherForecastTemp);
-        weatherForecastCardBody.append(weatherForecastHumidity);
-
-
+        weatherForecastBody.append(weatherForecastDate);
+        weatherForecastBody.append(weatherForecastIcon);
+        weatherForecastBody.append(weatherForecastTemp);
+        weatherForecastBody.append(weatherForecastHumidity);
+        //Entering info into cards 
+        weatherForecastDate.text(`${month}/${day}/${year}`);
+        weatherForecastIcon.attr("src", "http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + ".png");
+        weatherForecastTemp.text("Temperature: " + data.daily[i].temp.day + " °F");
+        weatherForecastHumidity.text("Humidity: " + data.daily[i].humidity + " %");
     };
-
 };
+
+//Function
+function cityHistory(data) {
+    //Local Storage
+    $(".city-results").click(function () {
+        var clickEl = $(this).localStorage.
+        console.log(clickEl);
+
+    });
+}
 
 
