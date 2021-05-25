@@ -88,7 +88,7 @@ $(".clear-history-btn").click(function () { $("li").remove() });
 
 //Handles uv index
 function handleUvIndex(data) {
-
+    //Changes the class colors based on the uv rating 
     uvIndex.addClass("badge");
     if (data.current.uvi < 3) {
         uvIndex.removeClass("bg-warning text-dark bg-danger")
@@ -104,4 +104,39 @@ function handleUvIndex(data) {
         uvIndex.addClass("bg-danger");
     }
 };
+
+//Displays the five day fore cast for selected city 
+function fiveDayForecast(data) {
+    var fiveDayWeather = data.daily;
+    console.log(fiveDayWeather);
+    //create for loop that will iterate 5 weather cards
+    for (var i = 0; i < 5; i++) {
+        console.log(weatherForecast.data.daily.length);
+
+        // $(".weather-forecast").append($("<div>", { class: "five-day" + i }).clone());
+        // Query Selectors that will append divs with card classes to weatherForecast
+        //Card containers
+        var weatherForecastCol = $("<div class='col-12 col-md-6 col-lg mb-3'>");
+        var weatherForecastCard = $("<div class='weather-card text-dark bg-primary'>");
+        var weatherForecastBody = $("<div class='weather-card-body'>");
+        //Card text
+        var weatherForecastDate = $("<h5 class='weather-card-title'>");
+        var weatherForecastIcon = $("<img>");
+        var weatherForecastTemp = $("<p class='weather-card-text mb-0'>");
+        var weatherForecastHumidity = $("<p class='weather-card-text mb-0'>");
+        //Append to containers
+        weatherForecast.append(weatherForecastCol);
+        weatherForecastCol.append(weatherForecastCard);
+        weatherForecastCard.append(weatherForecastBody);
+        //Append to text
+        weatherForecastCardBody.append(weatherForecastDate);
+        weatherForecastCardBody.append(weatherForecastIcon);
+        weatherForecastCardBody.append(weatherForecastTemp);
+        weatherForecastCardBody.append(weatherForecastHumidity);
+
+
+    };
+
+};
+
 
