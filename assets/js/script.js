@@ -122,7 +122,6 @@ function fiveDayForecast(data) {
         const day = date.getDate();
         const month = date.getMonth() + 1;
         const year = date.getFullYear();
-
         // Query Selectors that will append divs with card classes to weatherForecast
         //Card containers
         var weatherForecastCol = $("<div class='col-12 col-md-6 col-lg mb-3'>");
@@ -150,11 +149,13 @@ function fiveDayForecast(data) {
     };
 };
 
-//Function
+//Makes listed city result items clickable in order to view the selected result's history
 function cityHistory(data) {
     //Local Storage
     $(".city-results").click(function () {
-        var clickEl = $(this).localStorage.
+        var clickEl = $(this).attr('id');
+        localStorage.getItem(data)    
+        // localStorage.setItem("cities", JSON.stringify(clickEl));
         console.log(clickEl);
 
     });
