@@ -49,21 +49,6 @@ function searchResults(coord) {
             currentWeatherIcon.append($("<img>").attr("src", "http://openweathermap.org/img/wn/" + data.current.weather[0].icon + ".png"))
             //Changes the color of the text based on the current uv index
             handleUvIndex(data);
-            //Click on the city result element to see storage
-            $(".city-results").click(function () {
-                var clickEl = $(this).attr('id');
-                console.log(clickEl);
-
-                //Current Weather info
-                localStorage.setItem("city-current", JSON.stringify(data.current));
-                //Five day forecast
-                localStorage.setItem("city-daily", JSON.stringify(data.daily));
-                //Local Storage
-                var currentCityResult = JSON.parse(localStorage.getItem("city-current"));
-                var dailyCityResult = JSON.parse(localStorage.getItem("city-daily"));
-                console.log(currentCityResult)
-                console.log(dailyCityResult)
-            });
         });
 };
 
@@ -80,28 +65,54 @@ function getCoordinates(search) {
 };
 
 //Handles the search and calls the getCoordinates() function
-function handleSearch(event) {
+function handleSearch(cityName) {
     //Trims empty spaces from user input
-    event.preventDefault();
+    cityName.preventDefault();
     var search = searchInput.val().trim();
     console.log(search);
     getCoordinates(search);
     searchInput.val("");
-
+    //Calls the .on click function
+    historyClick(cityName)
     //Creates city list elements and appends them  to city-results
     var itemList = $('<li>').addClass('.city-results').text(search);
     $(".city-results").append(itemList);
-
     //Appends search result to city-name-title h3
     $("#city-name-title").addClass('.city-name-title').text(search);
     $(".city-name-title").append(cityNameTitle);
+    //Removes repeated cards
     $(".weather-card-body").remove();
+    // $(currentWeatherIcon).remove();
+
+};
+
+//Click on the city result element to see storage
+function historyClick() {
+    $(".city-results").click(function () {
+        var clickEl = $(this).attr("id");
+        console.log(clickEl);
+        // handleSearch(clickEl);
+    });
+    //Current Weather info
+    // localStorage.setItem("city-current", JSON.stringify(data.current));
+    // //Five day forecast
+    // localStorage.setItem("city-daily", JSON.stringify(data.daily));
+    // //Local Storage
+    // var currentCityResult = JSON.parse(localStorage.getItem("city-current"));
+    // var dailyCityResult = JSON.parse(localStorage.getItem("city-daily"));
+    // console.log(currentCityResult)
+    // console.log(dailyCityResult)
+};
+
+//Calls the handleSearch()
+function historySearch(event) {
+    var city = event.target.text
+    handleSearch(city)
+    // historyClick(city)
 };
 
 //When search button is clicked the handleSearch function is called
 searchButton.on("click", handleSearch);
-
-
 //When clear history button is clicked the city list items are removed
 $(".clear-history-btn").click(function () { $("li").remove() });
 
@@ -128,7 +139,7 @@ function handleUvIndex(data) {
 function fiveDayForecast(data) {
     //Variable that stores the daily object
     var fiveDayWeather = data.daily;
-    //Create for loop that will iterate 5 weather cards
+    //For loop that will iterate 5 weather cards
     for (var i = 1; i < 6; i++) {
         console.log(fiveDayWeather[i]);
         //Date for 5 day forecast
@@ -163,17 +174,4 @@ function fiveDayForecast(data) {
         weatherForecastHumidity.text("Humidity: " + data.daily[i].humidity + " %");
     };
 };
-
-//Makes listed city result items clickable in order to view the selected result's history
-// function cityHistory(data) {
-//     //Local Storage
-//     $(".city-results").click(function () {
-//         var clickEl = $(this).attr('id');
-//         localStorage.getItem(data)
-//         // localStorage.setItem("cities", JSON.stringify(clickEl));
-//         console.log(clickEl);
-
-//     });
-// }
-
 
