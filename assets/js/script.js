@@ -82,10 +82,12 @@ function handleSearch(event) {
     //Appends search result to city-name-title h3
     $("#city-name-title").addClass('.city-name-title').text(search);
     $(".city-name-title").append(cityNameTitle);
+    $(".weather-card-body").remove();
 };
 
 //When search button is clicked the handleSearch function is called
 searchButton.on("click", handleSearch);
+
 
 //When clear history button is clicked the city list items are removed
 $(".clear-history-btn").click(function () { $("li").remove() });
