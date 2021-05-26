@@ -50,7 +50,16 @@ function searchResults(coord) {
             //Changes the color of the text based on the current uv index
             handleUvIndex(data);
             //Click on the city result element to see storage
-            cityHistory(data);
+
+
+            //Current Weather info
+            localStorage.setItem("city-current", JSON.stringify(data.current));
+            //Five day forecast
+            localStorage.setItem("city-daily", JSON.stringify(data.daily)); 
+            var currentCityResult = JSON.parse(localStorage.getItem("city-current")); 
+            var dailyCityResult = JSON.parse(localStorage.getItem("city-daily")); 
+            console.log(currentCityResult)
+            console.log(dailyCityResult)
         });
 };
 
@@ -156,7 +165,7 @@ function cityHistory(data) {
     //Local Storage
     $(".city-results").click(function () {
         var clickEl = $(this).attr('id');
-        localStorage.getItem(data)    
+        localStorage.getItem(data)
         // localStorage.setItem("cities", JSON.stringify(clickEl));
         console.log(clickEl);
 
