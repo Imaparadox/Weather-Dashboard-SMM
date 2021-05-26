@@ -53,16 +53,17 @@ function searchResults(coord) {
             $(".city-results").click(function () {
                 var clickEl = $(this).attr('id');
                 console.log(clickEl);
+
+                //Current Weather info
+                localStorage.setItem("city-current", JSON.stringify(data.current));
+                //Five day forecast
+                localStorage.setItem("city-daily", JSON.stringify(data.daily));
+                //Local Storage
+                var currentCityResult = JSON.parse(localStorage.getItem("city-current"));
+                var dailyCityResult = JSON.parse(localStorage.getItem("city-daily"));
+                console.log(currentCityResult)
+                console.log(dailyCityResult)
             });
-            //Current Weather info
-            localStorage.setItem("city-current", JSON.stringify(data.current));
-            //Five day forecast
-            localStorage.setItem("city-daily", JSON.stringify(data.daily)); 
-            //Local Storage
-            var currentCityResult = JSON.parse(localStorage.getItem("city-current")); 
-            var dailyCityResult = JSON.parse(localStorage.getItem("city-daily")); 
-            console.log(currentCityResult)
-            console.log(dailyCityResult)
         });
 };
 
